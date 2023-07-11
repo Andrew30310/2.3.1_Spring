@@ -1,9 +1,6 @@
-package web.carService;
+package web.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import web.carService.CarService;
 import web.model.Car;
 
 import java.util.ArrayList;
