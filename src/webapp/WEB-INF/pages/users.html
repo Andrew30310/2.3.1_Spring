@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<th:block th:each="msg : ${messages}">
+    <h1 th:text="${msg}"></h1>
+</th:block>
+<h2>Show all users:</h2>
+<form method="get" action="/users">
+    <input type="submit" value="Show all users"/>
+</form>
+<h2>Show user by ID</h2>
+<form method="get" action="/showUser">
+    <label for="id">ID</label>
+    <input name="id" type="text" id="id">
+
+    <br>
+
+    <input type="submit" value="Show user"/>
+</form>
+<h2>Add a new user:</h2>
+<form method="get" action="/addUser">
+    <label for="name">Name</label>
+    <input name="name" type="text" id="name">
+
+    <br>
+
+    <label for="lastName">LastName</label>
+    <input name="lastName" type="text" id="lastName">
+
+    <br>
+
+    <label for="age">Age</label>
+    <input name="age" type="text" id="age">
+
+    <br>
+
+    <input type="submit" value="AddPerson"/>
+</form>
+<h2>Delete user by ID:</h2>
+<form method="get" action="/deleteUser">
+    <label for="id">ID</label>
+    <input name="id" type="text" id="id">
+
+    <br>
+
+    <input type="submit" value="DeleteUser"/>
+</form>
+<h2>Update user:</h2>
+<form method="get" action="/updateUser">
+    <label for="id">ID</label>
+    <input name="id" type="text" id="id">
+
+    <br>
+
+    <label for="name">New name</label>
+    <input name="name" type="text" id="name">
+
+    <br>
+
+    <label for="lastName">New LastName</label>
+    <input name="lastName" type="text" id="lastName">
+
+    <br>
+
+    <label for="age">New Age</label>
+    <input name="age" type="text" id="age">
+
+    <br>
+
+    <input type="submit" value="UpdatePerson"/>
+</form>
+<div>
+   <table border="1">
+       <tr>
+           <th>ID</th>
+           <th>Name</th>
+           <th>LastName</th>
+           <th>Age</th>
+       </tr>
+       <tr th:each ="user : ${resultUsersList}">
+           <td th:utext="${user.id}">...</td>
+           <td th:utext="${user.name}">...</td>
+           <td th:utext="${user.lastName}">...</td>
+           <td th:utext="${user.age}">...</td>
+       </tr>
+   </table>
+</div>
+</body>
+</html>
