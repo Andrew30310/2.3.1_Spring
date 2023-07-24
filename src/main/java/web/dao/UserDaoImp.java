@@ -2,21 +2,22 @@ package web.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Component
+@Repository
 public class UserDaoImp implements UserDao {
 
     @Autowired
-    EntityManagerFactory emf;
+    private EntityManagerFactory entityManagerFactory;
 
     @Override
     public boolean updateUser(int oldUsersId, User newUser) {
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         User user = em.find(User.class, oldUsersId);
         if (user != null) {
@@ -33,9 +34,9 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUser(int id) {
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         User user = em.find(User.class, id);
         em.close();
@@ -45,7 +46,7 @@ public class UserDaoImp implements UserDao {
     @Override
     public List<User> getUsersList() {
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = entityManagerFactory.createEntityManager();
         List<User> usersList = em.createQuery("FROM User").getResultList();
         em.close();
         return usersList;
@@ -54,7 +55,7 @@ public class UserDaoImp implements UserDao {
     @Override
     public void addUser(User user) {
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
@@ -62,9 +63,9 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void deleteUserById(int id) {
+    public void deleteUser(int id) {
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         User deletedUser = em.find(User.class, id);
         em.remove(deletedUser);
